@@ -3,16 +3,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { searchContext } from "../App";
 
 const DesktopNav = () => {
-  const { searchTerm, setSearchTerm } = React.useContext(searchContext);
+  const { searchTerm, setSearchTerm, setCategoryGroup } = React.useContext(searchContext);
   const navigate = useNavigate();
   return (
     <div className="navbar">
       <div className="nav-left">
         <Link to="/">Kaliyug Bazaar</Link>
-        <Link to="/fashion">Fashion</Link>
-        <Link to="/gadgets">Gadgets</Link>
-        <Link to="/homeessentials">Home Essentials</Link>
-        <Link to="/sportsandvehicles">Sports & Vehicles</Link>
+        <Link to="/filter" onClick={() => {
+          setCategoryGroup("Fashion & Accessories")
+        }} >Fashion</Link>
+        <Link to="/filter"  onClick={() => {
+          setCategoryGroup("Electronics & Gadgets")
+        }} >Gadgets</Link>
+        <Link to="/filter"  onClick={() => {
+          setCategoryGroup("Home & Living")
+        }} >Home Essentials</Link>
+        <Link to="/filter"  onClick={() => {
+          setCategoryGroup("Sports & Vehicles")
+        }} >Sports & Vehicles</Link>
+        <Link to= "/filter" >Filter</Link>
       </div>
       <div className="nav-right">
         <input
