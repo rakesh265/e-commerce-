@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext, useMemo } from "react";
 import { searchContext } from "../App";
-import "../Styles/Product.css";
+import ProductList from "./ProductList";
+import SubCategoryFilter from "./SubCategoryFilter";
+import { LIST_OF_CATEGORIES } from "./Constants";
 
 const Category = () => {
   const [data, setData] = useState([]);
@@ -28,37 +30,6 @@ const Category = () => {
     fetchData();
   }, []);
 
-  const listOfCategories = {
-    "Fashion & Accessories": [
-      "beauty",
-      "fragrances",
-      "mens-shirts",
-      "mens-shoes",
-      "mens-watches",
-      "sunglasses",
-      "tops",
-      "womens-bags",
-      "womens-dresses",
-      "womens-jewellery",
-      "womens-shoes",
-      "womens-watches",
-      "skin-care",
-    ],
-    "Electronics & Gadgets": [
-      "laptops",
-      "mobile-accessories",
-      "smartphones",
-      "tablets",
-    ],
-    "Home & Living": [
-      "furniture",
-      "groceries",
-      "home-decoration",
-      "kitchen-accessories",
-    ],
-    "Sports & Vehicles": ["motorcycle", "sports-accessories", "vehicle"],
-  };
-
   const filteredProducts = useMemo(() => {
     if (searchTerm) {
       const lowerSearchTerm = searchTerm.toLowerCase();
@@ -69,14 +40,15 @@ const Category = () => {
           ) || product.title.toLowerCase().includes(lowerSearchTerm)
       );
     } else if (categoryGroup) {
-      return data.filter((item) =>
-        listOfCategories[categoryGroup]?.some(
-          (subcategory) => item.category.toLowerCase() === subcategory.toLowerCase()
-        )
-      );
-    } else if (selectedSubCategory) {
-      return data.filter((item) =>
-        item.category.toLowerCase() === selectedSubCategory.toLowerCase()
+      return data.filter(
+        (item) =>
+          LIST_OF_CATEGORIES[categoryGroup]?.some(
+            (subcategory) =>
+              item.category.toLowerCase() === subcategory.toLowerCase()
+          ) &&
+          (selectedSubCategory
+            ? item.category.toLowerCase() === selectedSubCategory.toLowerCase()
+            : true)
       );
     } else {
       return data;
@@ -85,37 +57,20 @@ const Category = () => {
 
   return (
     <div className="filter">
-      {searchTerm ? (
-        <ul>
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((item) => <li key={item.id}>{item.title}</li>)
-          ) : (
-            <li>No products found</li>
-          )}
-        </ul>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>{error}</p>
       ) : (
         <>
-          <label htmlFor="subcategory-select">Choose a subcategory:</label>
-          <select
-            id="subcategory-select"
-            value={selectedSubCategory}
-            onChange={(e) => setSelectedSubCategory(e.target.value)}
-          >
-            <option value="">All</option>
-            {listOfCategories[categoryGroup]?.map((subCategory) => (
-              <option key={subCategory} value={subCategory}>
-                {subCategory}
-              </option>
-            ))}
-          </select>
-
-          <ul>
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((item) => <li key={item.id}>{item.title}</li>)
-            ) : (
-              <li>No products found</li>
-            )}
-          </ul>
+          {searchTerm ? null : (
+            <SubCategoryFilter
+              categoryGroup={categoryGroup}
+              selectedSubCategory={selectedSubCategory}
+              setSelectedSubCategory={setSelectedSubCategory}
+            />
+          )}
+          <ProductList products={filteredProducts} />
         </>
       )}
     </div>

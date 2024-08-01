@@ -1,0 +1,30 @@
+export const LIST_OF_CATEGORIES = {
+  "Fashion & Accessories": [
+    "beauty",
+    "fragrances",
+    "mens-shirts",
+    "mens-shoes",
+    "mens-watches",
+    "sunglasses",
+    "tops",
+    "womens-bags",
+    "womens-dresses",
+    "womens-jewellery",
+    "womens-shoes",
+    "womens-watches",
+    "skin-care",
+  ],
+  "Electronics & Gadgets": [
+    "laptops",
+    "mobile-accessories",
+    "smartphones",
+    "tablets",
+  ],
+  "Home & Living": [
+    "furniture",
+    "groceries",
+    "home-decoration",
+    "kitchen-accessories",
+  ],
+  "Sports & Vehicles": ["motorcycle", "sports-accessories", "vehicle"],
+};

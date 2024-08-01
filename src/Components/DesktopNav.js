@@ -9,19 +9,19 @@ const DesktopNav = () => {
     <div className="navbar">
       <div className="nav-left">
         <Link to="/">Kaliyug Bazaar</Link>
-        <Link to="/filter" onClick={() => {
+        <Link to="/category" onClick={() => {
           setCategoryGroup("Fashion & Accessories")
+          setSearchTerm("")
         }} >Fashion</Link>
-        <Link to="/filter"  onClick={() => {
+        <Link to="/category"  onClick={() => {
           setCategoryGroup("Electronics & Gadgets")
         }} >Gadgets</Link>
-        <Link to="/filter"  onClick={() => {
+        <Link to="/category"  onClick={() => {
           setCategoryGroup("Home & Living")
         }} >Home Essentials</Link>
-        <Link to="/filter"  onClick={() => {
+        <Link to="/category"  onClick={() => {
           setCategoryGroup("Sports & Vehicles")
         }} >Sports & Vehicles</Link>
-        <Link to= "/filter" >Filter</Link>
       </div>
       <div className="nav-right">
         <input
