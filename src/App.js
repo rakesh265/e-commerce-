@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavBar from "./Components/NavBar";
+import NavBar from "./Components/Navbar/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Components/Home";
 import Cart from "./Components/Cart";
 import Category from "./Components/Category";
-import Profile from "./Components/Profile";
+import Profile from "./Components/Authentication/Profile";
 import Login from "./Components/Login";
 
 export const searchContext = React.createContext("");

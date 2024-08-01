@@ -1,5 +1,5 @@
 import React from 'react'
-import MobileNav from './MobileNav'
+import MobileNav from '../MobileNav'
 import DesktopNav from './DesktopNav'
 import "../Styles/NavBar.css"
 
