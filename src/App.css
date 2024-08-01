@@ -12,3 +12,8 @@ body {
   overflow-x: hidden;
 
 }
+
+.category{
+  position: relative;
+  top:100px
+}

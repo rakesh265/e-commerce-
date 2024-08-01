@@ -56,7 +56,7 @@ const Category = () => {
   }, [data, searchTerm, categoryGroup, selectedSubCategory]);
 
   return (
-    <div className="filter">
+    <div className="category">
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
