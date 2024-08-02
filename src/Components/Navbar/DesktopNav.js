@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { searchContext, userContext } from "../App";
+import { searchContext, userContext } from "../../App";
 
 const DesktopNav = () => {
   const { searchTerm, setSearchTerm, setCategoryGroup } = React.useContext(searchContext);
@@ -8,9 +8,11 @@ const DesktopNav = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="navbar">
-      <div className="nav-left">
-        <Link to="/">Kaliyug Bazaar</Link>
+    <div className="desktop-nav-container">
+      <div className="desktop-nav-left">
+        <Link to="/" className="desktop-nav-brand">
+          Kaliyug Bazaar
+        </Link>
         <Link
           to="/category"
           onClick={() => {
@@ -45,10 +47,10 @@ const DesktopNav = () => {
           Sports & Vehicles
         </Link>
       </div>
-      <div className="nav-right">
+      <div className="desktop-nav-right">
         <input
           type="search"
-          className="search-box"
+          className="desktop-nav-search-box"
           placeholder="Search"
           value={searchTerm}
           onChange={(e) => {
@@ -56,11 +58,11 @@ const DesktopNav = () => {
             navigate("/category");
           }}
         />
-        <Link to="/cart">Cart</Link>
-        <Link to="/login">Login</Link>
-        <div className="profile">
-          <span>{userName}</span>
-          <div className="dropdown">
+        <Link to="/cart" className="desktop-nav-cart">Cart</Link>
+        <Link to="/login" className="desktop-nav-login">Login</Link>
+        <div className="desktop-nav-profile">
+          <span className="desktop-nav-username">{userName}</span>
+          <div className="desktop-nav-dropdown">
             {isAuth ? (
               <>
                 <Link to="/profile">My Profile</Link>

@@ -1,17 +1,18 @@
-.desktop-nav {
-  display: none;
-}
-
-a {
-  text-decoration: none;
-  font-weight: 500;
-  color: #0e0f17;
-}
-
-/* Mobile styling */
-
-.top-nav {
+/* Mobile navigation styling */
+.nav-mobile {
+  display: flex;
+  flex-direction: column;
   width: 100vw;
+}
+
+.mobile-nav-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mobile-nav-top {
+  width: 100%;
   height: 50px;
   display: flex;
   justify-content: space-between;
@@ -24,34 +25,43 @@ a {
   z-index: 1000;
 }
 
-.search-box {
+.mobile-nav-search-box {
   width: 70%;
   padding-left: 10px;
 }
 
-.bottom-Nav {
+.mobile-nav-bottom {
   width: 100%;
   height: 60px;
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: #ffffff;
-  z-index: 1000; /* Ensure it is above other elements */
+  z-index: 1000;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #0e0f17;
+}
+
+/* Desktop navigation styling */
+.desktop-nav-container {
+  display: none;
 }
 
 @media screen and (min-width: 769px) {
-  .mobile-nav {
+  .nav-mobile {
     display: none;
   }
-  .desktop-nav {
-    display: block;
-  }
 
-  .navbar {
-    width: 100%;
+  .desktop-nav-container {
     display: flex;
+    flex-direction: row;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
@@ -62,29 +72,30 @@ a {
     z-index: 1000;
     box-shadow: 0 4px 6px 0 rgba(21, 21, 21, 0.3);
   }
-  .nav-left {
+
+  .desktop-nav-left {
     display: flex;
     align-items: center;
     gap: 40px;
     margin-left: 40px;
   }
-  .nav-right {
+
+  .desktop-nav-right {
     display: flex;
     width: 40%;
     align-items: center;
     gap: 40px;
     margin-right: 40px;
   }
-
 }
 
-
-.profile {
+/* Dropdown profile styling */
+.desktop-nav-profile {
   position: relative;
   cursor: pointer;
 }
 
-.dropdown {
+.desktop-nav-dropdown {
   display: none;
   position: absolute;
   top: 100%;
@@ -96,11 +107,11 @@ a {
   border-radius: 4px;
 }
 
-.profile:hover .dropdown {
+.desktop-nav-profile:hover .desktop-nav-dropdown {
   display: block;
 }
 
-.dropdown a {
+.desktop-nav-dropdown a {
   display: block;
   padding: 8px 12px;
   color: #0e0f17;

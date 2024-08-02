@@ -1,9 +1,10 @@
-import axios from "axios";
 import React, { useState, useEffect, useContext, useMemo } from "react";
-import { searchContext } from "../App";
-import ProductList from "./ProductList";
-import SubCategoryFilter from "./SubCategoryFilter";
-import { LIST_OF_CATEGORIES } from "./Constants";
+import axios from "axios";
+import { searchContext } from "../../App";
+import ProductList from "../ProductFilters/ProductList";
+import SubCategoryFilter from "../ProductFilters/SubCategoryFilter";
+import { LIST_OF_CATEGORIES } from "../ProductFilters/Constants";
+import "../../Styles/Category.css";
 
 const Category = () => {
   const [data, setData] = useState([]);
@@ -56,11 +57,11 @@ const Category = () => {
   }, [data, searchTerm, categoryGroup, selectedSubCategory]);
 
   return (
-    <div className="category">
+    <div className="category-container">
       {loading ? (
-        <p>Loading...</p>
+        <p className="category-loading">Loading...</p>
       ) : error ? (
-        <p>{error}</p>
+        <p className="category-error">{error}</p>
       ) : (
         <>
           {searchTerm ? null : (

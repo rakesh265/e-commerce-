@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { userContext } from '../../App';
-import "../Styles/Login.css"
+import "../../Styles/Login.css"
 
 const Login = () => {
   const { setIsAuth, userName, setUserName } = useContext(userContext);
@@ -23,37 +23,37 @@ const Login = () => {
   };
 
   return (
-    <>
-      <div className="signin">
-        <form className="form" onSubmit={handleSubmit}>
-          <h1>Sign In</h1>
-          {errMsg && <p className="error">{errMsg}</p>}
-          <input type='text'
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            className="input"
-            value={emailInput}
-            onChange={(e) => setEmailInput(e.target.value)}
-          />
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            className="input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div className="account">
-            <span>Forgot password</span>
-            <span>Don't have an account?</span>
-          </div>
-          <button type="submit" className="signin-btn">Sign In</button>
-        </form>
-      </div>
-    </>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h1>Sign In</h1>
+        {errMsg && <p className="login-error">{errMsg}</p>}
+        <input 
+          type='text'
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          className="login-username"
+        />
+        <label className="login-label">Email</label>
+        <input
+          type="email"
+          className="login-input"
+          value={emailInput}
+          onChange={(e) => setEmailInput(e.target.value)}
+        />
+        <label className="login-label">Password</label>
+        <input
+          type="password"
+          className="login-input"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <div className="login-account">
+          <span>Forgot password</span>
+          <span>Don't have an account?</span>
+        </div>
+        <button type="submit" className="login-btn">Sign In</button>
+      </form>
+    </div>
   );
 };
 

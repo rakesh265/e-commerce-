@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { cartContext } from "../App";
-import "../Styles/Cart.css"
+import { cartContext } from "../../App";
+import "../../Styles/Cart.css";
 
 const Cart = () => {
   const { CartItems, removeFromCart } = useContext(cartContext);
@@ -20,10 +20,10 @@ const Cart = () => {
     total + item.price * (quantities[item.id] || 1), 0);
 
   return (
-    <div className="cart">
-      <h1>Shopping Cart</h1>
+    <div className="cart-container">
+      <h1 className="cart-heading">Shopping Cart</h1>
       {CartItems.length === 0 ? (
-        <p>Your cart is empty</p>
+        <p className="cart-empty">Your cart is empty</p>
       ) : (
         <>
           <ul className="cart-items">
@@ -47,7 +47,7 @@ const Cart = () => {
                       +
                     </button>
                   </div>
-                  <button onClick={() => removeFromCart(item.id)} className="remove-button">
+                  <button onClick={() => removeFromCart(item.id)} className="cart-remove-button">
                     Remove
                   </button>
                 </div>
@@ -55,8 +55,8 @@ const Cart = () => {
             ))}
           </ul>
           <div className="cart-summary">
-            <h2>Total: ${totalPrice.toFixed(2)}</h2>
-            <button className="checkout-button">Proceed to Checkout</button>
+            <h2 className="cart-total">Total: ${totalPrice.toFixed(2)}</h2>
+            <button className="cart-checkout-button">Proceed to Checkout</button>
           </div>
         </>
       )}

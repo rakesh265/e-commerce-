@@ -1,37 +1,38 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { AiFillFacebook, AiFillTwitterSquare, AiFillInstagram } from 'react-icons/ai';
-// import './Footer.css'; // Import custom CSS file for footer styles
+import { Link } from 'react-router-dom';
+import '../../Styles/Footer.css'; // Ensure this file is created and styled
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer-container">
       <Container>
         <Row>
           <Col md={4} sm={6} className="footer-col">
             <h5>Quick Links</h5>
             <ul className="footer-links">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Shop</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Contact Us</a></li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/shop">Shop</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/contact">Contact Us</Link></li>
             </ul>
           </Col>
           <Col md={4} sm={6} className="footer-col">
             <h5>Categories</h5>
             <ul className="footer-links">
-              <li><a href="#">Men</a></li>
-              <li><a href="#">Women</a></li>
-              <li><a href="#">Kids</a></li>
-              <li><a href="#">Accessories</a></li>
+              <li><Link to="/men">Men</Link></li>
+              <li><Link to="/women">Women</Link></li>
+              <li><Link to="/kids">Kids</Link></li>
+              <li><Link to="/accessories">Accessories</Link></li>
             </ul>
           </Col>
           <Col md={4} className="footer-col">
             <h5>Follow Us</h5>
             <div className="social-icons">
-              <a href="#"><AiFillFacebook /></a>
-              <a href="#"><AiFillTwitterSquare /></a>
-              <a href="#"><AiFillInstagram /></a>
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><AiFillFacebook /></a>
+              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer"><AiFillTwitterSquare /></a>
+              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><AiFillInstagram /></a>
             </div>
           </Col>
         </Row>
