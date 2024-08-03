@@ -7,7 +7,7 @@ import Home from "./Components/Pages/Home";
 import Cart from "./Components/Pages/Cart";
 import Category from "./Components/Pages/Category";
 import Login from "./Components/Authentication/Login";
-import ProductPreview from "./Components/ProductFilters/ProductPreview";
+import ProductPreview from "./Components/Pages/ProductPreview";
 
 export const searchContext = React.createContext("");
 export const cartContext = React.createContext("");

@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext, useMemo } from "react";
 import axios from "axios";
-import { searchContext } from "../../App";
-import ProductList from "../ProductFilters/ProductList";
-import SubCategoryFilter from "../ProductFilters/SubCategoryFilter";
-import { LIST_OF_CATEGORIES } from "../ProductFilters/Constants";
+import { searchContext, productContext } from "../../App";
+import { useNavigate } from "react-router-dom";
+import { LIST_OF_CATEGORIES } from "./Constants";
 import "../../Styles/Category.css";
 
 const Category = () => {
@@ -12,6 +11,13 @@ const Category = () => {
   const [loading, setLoading] = useState(true);
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const { searchTerm, categoryGroup } = useContext(searchContext);
+  const { setProductDetails } = useContext(productContext);
+  const navigate = useNavigate();
+
+  const handleProduct = (item) => {
+    setProductDetails(item);
+    navigate("/product");
+  };
 
   const fetchData = async () => {
     try {
@@ -64,14 +70,62 @@ const Category = () => {
         <p className="category-error">{error}</p>
       ) : (
         <>
-          {searchTerm ? null : (
-            <SubCategoryFilter
-              categoryGroup={categoryGroup}
-              selectedSubCategory={selectedSubCategory}
-              setSelectedSubCategory={setSelectedSubCategory}
-            />
-          )}
-          <ProductList products={filteredProducts} />
+          <div className="subcategory-filter-container">
+            <label>Choose a subcategory:</label>
+            <br />
+            <div className="subcategory-filter-radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="subcategory"
+                  value=""
+                  checked={selectedSubCategory === ""}
+                  onChange={() => setSelectedSubCategory("")}
+                />
+                All
+              </label>
+              {LIST_OF_CATEGORIES[categoryGroup]?.map((subCategory) => (
+                <label key={subCategory}>
+                  <input
+                    type="radio"
+                    name="subcategory"
+                    value={subCategory}
+                    checked={selectedSubCategory === subCategory}
+                    onChange={() => setSelectedSubCategory(subCategory)}
+                  />
+                  {subCategory}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div className="product-list-container">
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((item) => (
+                <div
+                  key={item.id}
+                  className="product-list-card"
+                  onClick={() => handleProduct(item)}
+                >
+                  <section className="product-list-image">
+                    <img
+                      src={item.images[0]}
+                      alt={item.title}
+                      className="product-list-img"
+                    />
+                  </section>
+                  <section className="product-list-details">
+                    <span className="product-list-type">
+                      {item.brand || item.category}
+                    </span>
+                    <span className="product-list-title">{item.title}</span>
+                    <span className="product-list-price">${item.price}</span>
+                  </section>
+                </div>
+              ))
+            ) : (
+              <p className="product-list-no-items">No products found</p>
+            )}
+          </div>
         </>
       )}
     </div>

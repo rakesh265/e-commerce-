@@ -28,3 +28,4 @@ export const LIST_OF_CATEGORIES = {
   ],
   "Sports & Vehicles": ["motorcycle", "sports-accessories", "vehicle"],
 };
+
