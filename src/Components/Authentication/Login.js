@@ -15,7 +15,8 @@ const Login = () => {
       setIsAuth(false);
     } else {
       setErrMsg("");
-      localStorage.setItem("userName", emailInput);
+      localStorage.setItem("userName", userName);
+      localStorage.setItem("userEmail", emailInput)
       setIsAuth(true);
       setEmailInput("")
       setPassword("")

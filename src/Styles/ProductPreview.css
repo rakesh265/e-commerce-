@@ -1,18 +1,19 @@
-/* Ensure the body and html take up the full viewport height */
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-/* Full-screen container */
 .product-preview {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #f5f5f5; /* Optional: background color */
+  background-color: #f5f5f5; 
+  position: relative;
+  top: 100px;
 }
 
 .product-container {
@@ -24,7 +25,7 @@ html, body {
   max-width: 600px;
   width: 100%;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: box shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .img {
@@ -51,13 +52,17 @@ html, body {
 }
 
 .type {
-  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
   color: #888;
 }
 
 .title {
+  text-transform: uppercase;
   font-size: 24px;
   font-weight: bold;
+  font-weight: 500;
 }
 
 .description {
@@ -83,7 +88,7 @@ html, body {
   color: #888;
 }
 
-button {
+.add-to-cart-btn {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -96,11 +101,11 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+.add-to-cart-btn:hover {
   background-color: #0056b3;
 }
 
-button .cart {
+.add-to-cart-btn .cart {
   width: 20px;
   height: 20px;
 }

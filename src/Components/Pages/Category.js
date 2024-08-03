@@ -69,35 +69,37 @@ const Category = () => {
       ) : error ? (
         <p className="category-error">{error}</p>
       ) : (
-        <>
-          <div className="subcategory-filter-container">
-            <label>Choose a subcategory:</label>
-            <br />
-            <div className="subcategory-filter-radio-group">
-              <label>
-                <input
-                  type="radio"
-                  name="subcategory"
-                  value=""
-                  checked={selectedSubCategory === ""}
-                  onChange={() => setSelectedSubCategory("")}
-                />
-                All
-              </label>
-              {LIST_OF_CATEGORIES[categoryGroup]?.map((subCategory) => (
-                <label key={subCategory}>
+        <div className={ `${searchTerm ? 'product-container-main-1' : 'product-container-main'}`}>
+          {!searchTerm && (
+            <div className="subcategory-filter-container">
+              <label>Choose a subcategory:</label>
+              <br />
+              <div className="subcategory-filter-radio-group">
+                <label>
                   <input
                     type="radio"
                     name="subcategory"
-                    value={subCategory}
-                    checked={selectedSubCategory === subCategory}
-                    onChange={() => setSelectedSubCategory(subCategory)}
+                    value=""
+                    checked={selectedSubCategory === ""}
+                    onChange={() => setSelectedSubCategory("")}
                   />
-                  {subCategory}
+                  All
                 </label>
-              ))}
+                {LIST_OF_CATEGORIES[categoryGroup]?.map((subCategory) => (
+                  <label key={subCategory}>
+                    <input
+                      type="radio"
+                      name="subcategory"
+                      value={subCategory}
+                      checked={selectedSubCategory === subCategory}
+                      onChange={() => setSelectedSubCategory(subCategory)}
+                    />
+                    {subCategory}
+                  </label>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           <div className="product-list-container">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((item) => (
@@ -126,7 +128,7 @@ const Category = () => {
               <p className="product-list-no-items">No products found</p>
             )}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
