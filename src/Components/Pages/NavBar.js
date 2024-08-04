@@ -1,18 +1,28 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { searchContext, userContext } from "../../App";
+import "../../Styles/NavBar.css";
 
-const DesktopNav = () => {
+const NavBar = () => {
   const { searchTerm, setSearchTerm, setCategoryGroup } = React.useContext(searchContext);
-  const { isAuth, userName } = React.useContext(userContext);
+  const { setIsAuth, userName, setUserName } = React.useContext(userContext);
   const navigate = useNavigate();
 
+  const handleLogOut = () => {
+    localStorage.removeItem("userName");
+    setIsAuth(false);
+    setUserName("");
+  };
+
   return (
-    <div className="desktop-nav-container">
-      <div className="desktop-nav-left">
-        <Link to="/" className="desktop-nav-brand">
-          Kaliyug Bazaar
+    <div className="nav-container">
+      <div className="nav-brand">
+        <Link to="/" className="nav-brand-link">
+          Kaliyug
+          <div className="nav-brand-subtext">Bazaar</div> 
         </Link>
+      </div>
+      <div className="nav-left">
         <Link
           to="/category"
           onClick={() => {
@@ -47,10 +57,10 @@ const DesktopNav = () => {
           Sports & Vehicles
         </Link>
       </div>
-      <div className="desktop-nav-right">
+      <div className="nav-right">
         <input
           type="search"
-          className="desktop-nav-search-box"
+          className="nav-search-box"
           placeholder="Search"
           value={searchTerm}
           onChange={(e) => {
@@ -58,19 +68,13 @@ const DesktopNav = () => {
             navigate("/category");
           }}
         />
-        <Link to="/cart" className="desktop-nav-cart">Cart</Link>
-        <Link to="/login" className="desktop-nav-login">Login</Link>
-        <div className="desktop-nav-profile">
-          <span className="desktop-nav-username">{userName}</span>
-          <div className="desktop-nav-dropdown">
-            {isAuth ? (
-              <>
-                <Link to="/profile">My Profile</Link>
-                <Link to="/logout">Logout</Link>
-              </>
-            ) : (
-              <Link to="/login">Login</Link>
-            )}
+        <Link to="/cart" className="nav-cart">
+          Cart
+        </Link>
+        <div className="nav-profile">
+          <span className="nav-username">{userName}</span>
+          <div className="nav-dropdown">
+            <span onClick={handleLogOut}>Logout</span>
           </div>
         </div>
       </div>
@@ -78,4 +82,4 @@ const DesktopNav = () => {
   );
 };
 
-export default DesktopNav;
+export default NavBar;

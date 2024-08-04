@@ -1,57 +1,63 @@
 import React, { useState, useContext } from 'react';
 import { userContext } from '../../App';
-import "../../Styles/Login.css"
+import "../../Styles/Login.css";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { setIsAuth, userName, setUserName } = useContext(userContext);
   const [errMsg, setErrMsg] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [password, setPassword] = useState("");
+  const naviagte = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (emailInput.trim() === "" || password.trim() === "") {
-      setErrMsg("Please Enter the Input");
+      setErrMsg("Please enter both email and password");
       setIsAuth(false);
     } else {
       setErrMsg("");
       localStorage.setItem("userName", userName);
-      localStorage.setItem("userEmail", emailInput)
+      localStorage.setItem("userEmail", emailInput);
       setIsAuth(true);
-      setEmailInput("")
-      setPassword("")
+      setEmailInput("");
+      setPassword("");
+      naviagte("/")
     }
   };
 
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
-        <h1>Sign In</h1>
+        <h1 className='login-heading'>Sign In</h1>
         {errMsg && <p className="login-error">{errMsg}</p>}
+        <label htmlFor="username" className="login-label">Username</label>
         <input 
-          type='text'
+          id="username"
+          type="text"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
-          className="login-username"
+          className="login-input"
+          placeholder='Enter your name here'
         />
-        <label className="login-label">Email</label>
+        <label htmlFor="email" className="login-label">Email</label>
         <input
+          id="email"
           type="email"
           className="login-input"
           value={emailInput}
           onChange={(e) => setEmailInput(e.target.value)}
+          placeholder='exapmle@gmail.com'
         />
-        <label className="login-label">Password</label>
+        <label htmlFor="password" className="login-label">Password</label>
         <input
+          id="password"
           type="password"
           className="login-input"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder='xxxxxxxx'
         />
-        <div className="login-account">
-          <span>Forgot password</span>
-          <span>Don't have an account?</span>
-        </div>
         <button type="submit" className="login-btn">Sign In</button>
       </form>
     </div>

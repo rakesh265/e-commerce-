@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavBar from "./Components/Navbar/NavBar";
+import NavBar from "./Components/Pages/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Components/Pages/Home";
 import Cart from "./Components/Pages/Cart";
 import Category from "./Components/Pages/Category";
-import Login from "./Components/Authentication/Login";
+import Login from "./Components/Pages/Login";
 import ProductPreview from "./Components/Pages/ProductPreview";
 
 export const searchContext = React.createContext("");
@@ -57,14 +57,14 @@ function App() {
         <cartContext.Provider value={cartContextValue}>
           <productContext.Provider value={productContextValue}>
             <BrowserRouter>
-              <NavBar />
-              <Routes>
+            {/* {isAuth ? (<NavBar />) : (<Login />)} */}
+              <NavBar/>
+              {/* <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/category" element={<Category />} />
                 <Route path="/product" element={<ProductPreview />} />
-                <Route path="/login" element={<Login />} />
-              </Routes>
+              </Routes> */}
             </BrowserRouter>
           </productContext.Provider>
         </cartContext.Provider>
