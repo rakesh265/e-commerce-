@@ -11,16 +11,24 @@ import ProductPreview from "./Components/Pages/ProductPreview";
 
 export const searchContext = React.createContext("");
 export const cartContext = React.createContext("");
-export const userContext = React.createContext("");
+export const userContext = React.createContext(null);
 export const productContext = React.createContext("");
+export const fetchContext = React.createContext("");
 
 function App() {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [categoryGroup, setCategoryGroup] = React.useState("");
   const [CartItems, setCartItems] = React.useState([]);
-  const [isAuth, setIsAuth] = React.useState(false);
+
   const [userName, setUserName] = React.useState("");
+  const isLogged = localStorage.getItem("userName") !== null
+  const [isAuth, setIsAuth] = React.useState(isLogged ?? false);
+
+  
   const [productDetails, setProductDetails] = React.useState("");
+  const [data, setData] = React.useState([]);
+  const [error, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(true);
 
   const removeFromCart = (id) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
@@ -50,22 +58,38 @@ function App() {
     productDetails,
     setProductDetails,
   };
+  const featchContextValue = {
+    data,
+    setData,
+    error,
+    setError,
+    loading,
+    setLoading,
+  };
 
   return (
     <userContext.Provider value={userContextValue}>
       <searchContext.Provider value={searchContextValue}>
         <cartContext.Provider value={cartContextValue}>
           <productContext.Provider value={productContextValue}>
+          <fetchContext.Provider value={featchContextValue}>
             <BrowserRouter>
-            {/* {isAuth ? (<NavBar />) : (<Login />)} */}
-              <NavBar/>
-              {/* <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/category" element={<Category />} />
-                <Route path="/product" element={<ProductPreview />} />
-              </Routes> */}
+              {isAuth ? (
+                <>
+                  <NavBar />
+
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/category" element={<Category />} />
+                    <Route path="/product" element={<ProductPreview />} />
+                  </Routes>
+                </>
+              ) : (
+                <Login />
+              )}
             </BrowserRouter>
+            </fetchContext.Provider>
           </productContext.Provider>
         </cartContext.Provider>
       </searchContext.Provider>

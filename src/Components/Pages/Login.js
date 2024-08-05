@@ -14,11 +14,9 @@ const Login = () => {
     e.preventDefault();
     if (emailInput.trim() === "" || password.trim() === "") {
       setErrMsg("Please enter both email and password");
-      setIsAuth(false);
     } else {
       setErrMsg("");
       localStorage.setItem("userName", userName);
-      localStorage.setItem("userEmail", emailInput);
       setIsAuth(true);
       setEmailInput("");
       setPassword("");
@@ -31,6 +29,7 @@ const Login = () => {
       <form className="login-form" onSubmit={handleSubmit}>
         <h1 className='login-heading'>Sign In</h1>
         {errMsg && <p className="login-error">{errMsg}</p>}
+        
         <label htmlFor="username" className="login-label">Username</label>
         <input 
           id="username"

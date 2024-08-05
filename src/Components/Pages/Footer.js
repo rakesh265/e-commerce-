@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { AiFillFacebook, AiFillTwitterSquare, AiFillInstagram } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import '../../Styles/Footer.css'; // Ensure this file is created and styled
+import '../../Styles/Footer.css'; 
 
 const Footer = () => {
   return (

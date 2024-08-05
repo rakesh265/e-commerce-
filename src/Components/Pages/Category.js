@@ -1,17 +1,22 @@
-import React, { useState, useEffect, useContext, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useMemo,
+  useCallback,
+} from "react";
 import axios from "axios";
-import { searchContext, productContext } from "../../App";
+import { searchContext, productContext, fetchContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { LIST_OF_CATEGORIES } from "./Constants";
 import "../../Styles/Category.css";
 
 const Category = () => {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const { searchTerm, categoryGroup } = useContext(searchContext);
   const { setProductDetails } = useContext(productContext);
+  const { data, setData, error, setError, loading, setLoading } =
+    useContext(fetchContext);
   const navigate = useNavigate();
 
   const handleProduct = (item) => {
@@ -19,7 +24,8 @@ const Category = () => {
     navigate("/product");
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
+    setLoading(true);
     try {
       const res = await axios.get(`https://dummyjson.com/products?limit=0`);
       setData(res.data.products);
@@ -31,11 +37,11 @@ const Category = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [setData, setError, setLoading]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const filteredProducts = useMemo(() => {
     if (searchTerm) {
@@ -69,15 +75,19 @@ const Category = () => {
       ) : error ? (
         <p className="category-error">{error}</p>
       ) : (
-        <div className={ `${searchTerm ? 'product-container-main-1' : 'product-container-main'}`}>
+        <div
+          className={`${
+            searchTerm ? "product-container-main-1" : "product-container-main"
+          }`}
+        >
           {!searchTerm && (
             <div className="subcategory-filter-container">
-              <label>Choose a subcategory:</label>
+              <label htmlFor="subcategory">Choose a subcategory:</label>
               <br />
               <div className="subcategory-filter-radio-group">
                 <label>
                   <input
-                    type="radio"
+                    type="checkbox"
                     name="subcategory"
                     value=""
                     checked={selectedSubCategory === ""}
@@ -88,7 +98,7 @@ const Category = () => {
                 {LIST_OF_CATEGORIES[categoryGroup]?.map((subCategory) => (
                   <label key={subCategory}>
                     <input
-                      type="radio"
+                      type="checkbox"
                       name="subcategory"
                       value={subCategory}
                       checked={selectedSubCategory === subCategory}
@@ -110,7 +120,7 @@ const Category = () => {
                 >
                   <section className="product-list-image">
                     <img
-                      src={item.images[0]}
+                      src={item.thumbnail}
                       alt={item.title}
                       className="product-list-img"
                     />
