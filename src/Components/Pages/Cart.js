@@ -1,9 +1,12 @@
 import React, { useContext, useState } from "react";
-import { cartContext } from "../../App";
+import { cartContext, productContext } from "../../App";
 import "../../Styles/Cart.css";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { CartItems, removeFromCart } = useContext(cartContext);
+  const{setProductDetails} = useContext(productContext)
+  const navigate = useNavigate()
 
   const [quantities, setQuantities] = useState(
     CartItems.reduce((acc, item) => ({ ...acc, [item.id]: 1 }), {})
@@ -19,6 +22,11 @@ const Cart = () => {
   const totalPrice = CartItems.reduce((total, item) => 
     total + item.price * (quantities[item.id] || 1), 0);
 
+  const handleProduct = (item) => {
+    setProductDetails(item)
+    navigate("/Product")
+  }
+
   return (
     <div className="cart-container">
       <h1 className="cart-heading">Shopping Cart</h1>
@@ -28,8 +36,8 @@ const Cart = () => {
         <>
           <ul className="cart-items">
             {CartItems.map(item => (
-              <li key={item.id} className="cart-item">
-                <img src={item.images[0]} alt={item.title} className="cart-item-image" />
+              <li key={item.id} className="cart-item" >
+                <img src={item.images[0]} alt={item.title} className="cart-item-image" onClick={() => handleProduct(item)}/>
                 <div className="cart-item-details">
                   <h2 className="cart-item-title">{item.title}</h2>
                   <p className="cart-item-price">${item.price.toFixed(2)}</p>

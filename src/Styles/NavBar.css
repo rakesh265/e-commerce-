@@ -131,6 +131,7 @@
   transform: translateX(100%);
   color: #ffffff;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  z-index: 1000;
 }
 
 .menu-bar.open {

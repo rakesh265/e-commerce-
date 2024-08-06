@@ -10,10 +10,11 @@
 
 .product-container-main {
   display: grid;
-  grid-template-columns: 0.5fr 3fr; 
+  grid-template-columns: 0.5fr 3fr;
   gap: 20px;
 }
-.product-container-main-1{
+
+.product-container-main-1 {
   display: flex;
 }
 
@@ -83,21 +84,58 @@
 
 .product-list-type {
   text-transform: uppercase;
-  color: #3E3F45;
+  color: #3e3f45;
   font-weight: 500;
   font-size: 1rem;
 }
 
 .product-list-title {
   text-transform: uppercase;
-  color: #56575D;
+  color: #56575d;
   font-weight: 300;
   font-size: 0.9rem;
 }
 
 .product-list-price {
-  color: #0E0F17;
+  color: #0e0f17;
   font-weight: 600;
   font-size: 1.1rem;
   margin-top: 5px;
+}
+
+.filter-btn {
+  display: none;
+}
+
+@media (max-width: 426px) {
+  .product-container-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .subcategory-filter-container {
+    display: none;
+  }
+
+  .filter-btn {
+    display: inline;
+    height: 30px;
+    margin-bottom: 20px;
+  }
+  .filter-btn.open{
+    display: none;
+  }
+
+  .subcategory-filter-container.open {
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+  }
 }

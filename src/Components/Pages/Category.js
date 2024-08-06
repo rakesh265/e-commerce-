@@ -12,12 +12,14 @@ import { LIST_OF_CATEGORIES } from "./Constants";
 import "../../Styles/Category.css";
 
 const Category = () => {
-  const [selectedSubCategory, setSelectedSubCategory] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const { searchTerm, categoryGroup } = useContext(searchContext);
   const { setProductDetails } = useContext(productContext);
   const { data, setData, error, setError, loading, setLoading } =
     useContext(fetchContext);
   const navigate = useNavigate();
+
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const handleProduct = (item) => {
     setProductDetails(item);
@@ -81,34 +83,52 @@ const Category = () => {
           }`}
         >
           {!searchTerm && (
-            <div className="subcategory-filter-container">
-              <label htmlFor="subcategory">Choose a subcategory:</label>
-              <br />
-              <div className="subcategory-filter-radio-group">
-                <label>
-                  <input
-                    type="checkbox"
-                    name="subcategory"
-                    value=""
-                    checked={selectedSubCategory === ""}
-                    onChange={() => setSelectedSubCategory("")}
-                  />
-                  All
-                </label>
-                {LIST_OF_CATEGORIES[categoryGroup]?.map((subCategory) => (
-                  <label key={subCategory}>
+            <>
+              <button
+                className={`filter-btn ${filterOpen ? "open" : ""}`}
+                onClick={() => setFilterOpen((prev) => !prev)}
+              >
+                Filter
+              </button>
+              <div
+                className={`subcategory-filter-container ${
+                  filterOpen ? "open" : ""
+                }`}
+              >
+                <button
+                  className="close-filter-btn"
+                  onClick={() => setFilterOpen(false)}
+                >
+                  X
+                </button>
+                <label htmlFor="subcategory">Choose a subcategory:</label>
+                <br />
+                <div className="subcategory-filter-radio-group">
+                  <label>
                     <input
-                      type="checkbox"
+                      type="radio"
                       name="subcategory"
-                      value={subCategory}
-                      checked={selectedSubCategory === subCategory}
-                      onChange={() => setSelectedSubCategory(subCategory)}
+                      value=""
+                      checked={selectedSubCategory === ""}
+                      onChange={() => setSelectedSubCategory("")}
                     />
-                    {subCategory}
+                    All
                   </label>
-                ))}
+                  {LIST_OF_CATEGORIES[categoryGroup]?.map((subCategory) => (
+                    <label key={subCategory}>
+                      <input
+                        type="radio"
+                        name="subcategory"
+                        value={subCategory}
+                        checked={selectedSubCategory === subCategory}
+                        onChange={() => setSelectedSubCategory(subCategory)}
+                      />
+                      {subCategory}
+                    </label>
+                  ))}
+                </div>
               </div>
-            </div>
+            </>
           )}
           <div className="product-list-container">
             {filteredProducts.length > 0 ? (
