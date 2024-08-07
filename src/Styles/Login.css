@@ -50,9 +50,9 @@ body {
   outline: none;
 }
 
-.login-input:nth-of-type(2) {
+/* .login-input:nth-of-type(2) {
     text-transform: lowercase;
-}
+} */
 
 .login-input::placeholder {
     font-size: 14px;

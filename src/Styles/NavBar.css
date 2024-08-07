@@ -45,7 +45,7 @@
 }
 
 .nav-container a:hover {
-  color: #782a2a; /* yellow accent color on hover */
+  color: #782a2a; 
 }
 
 .nav-search-box {
@@ -73,7 +73,7 @@
 }
 
 .nav-cart {
-  color: #782a2a; /* yellow accent color */
+  color: #782a2a; 
 }
 
 .nav-profile {
@@ -162,7 +162,7 @@
 }
 
 .menu-bar a:hover {
-  color: #782a2a; /* yellow accent color on hover */
+  color: #782a2a; 
 }
 
 .menu-username {

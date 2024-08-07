@@ -4,7 +4,7 @@
   --white: #ffffff;
   --shadow-light: rgba(0, 0, 0, 0.1);
   --shadow-dark: rgba(0, 0, 0, 0.2);
-  --primary-color: #f05f40; /* Myntra's primary color */
+  --primary-color: #f05f40; 
 }
 
 .category-container {
@@ -124,7 +124,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  display: none; /* Ensure visibility */
+  display: none; 
 }
 
 .filter-btn:hover {
@@ -142,11 +142,11 @@
   top: 10px;
   right: 10px;
   font-size: 1.2rem;
-  display: none; /* Hidden by default */
+  display: none; 
 }
 
 .subcategory-filter-container.open .close-filter-btn {
-  display: block; /* Show when filter is open */
+  display: block; 
 }
 
 @media (max-width: 768px) {
@@ -163,8 +163,7 @@
     flex-direction: column;
   }
   .filter-btn {
-    display: block; /* Ensure visibility */
-
+    display: block; 
     height: 40px;
   }
 
@@ -177,17 +176,17 @@
     background-color: var(--white);
     padding: 20px;
     box-shadow: 0 4px 8px var(--shadow-light);
-    display: none; /* Hide by default */
+    display: none; 
   }
 
   .subcategory-filter-container.open {
-    display: block; /* Show when filter is open */
+    display: block; 
   }
 }
 
 @media (max-width: 426px) {
   .filter-btn {
-    display: block; /* Ensure visibility */
+    display: block; 
 
     height: 40px;
   }
@@ -201,11 +200,11 @@
     background-color: var(--white);
     padding: 20px;
     box-shadow: 0 4px 8px var(--shadow-light);
-    display: none; /* Hide by default */
+    display: none; 
   }
 
   .subcategory-filter-container.open {
-    display: block; /* Show when filter is open */
+    display: block; 
   }
 
   .product-list-container {

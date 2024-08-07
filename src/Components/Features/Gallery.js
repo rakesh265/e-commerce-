@@ -11,7 +11,7 @@ const Gallery = () => {
       LIST_OF_CATEGORIES[categoryGroup]?.some(
         (subcategory) => item.category.toLowerCase() === subcategory.toLowerCase()
       )
-    ).slice(0, 10); // Limit to 10 images
+    ).slice(0, 10); 
   };
 
   return (
