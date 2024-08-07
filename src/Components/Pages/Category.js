@@ -12,7 +12,7 @@ import { LIST_OF_CATEGORIES } from "./Constants";
 import "../../Styles/Category.css";
 
 const Category = () => {
-  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+  const [selectedSubCategories, setSelectedSubCategories] = useState([]);
   const { searchTerm, categoryGroup } = useContext(searchContext);
   const { setProductDetails } = useContext(productContext);
   const { data, setData, error, setError, loading, setLoading } =
@@ -45,6 +45,20 @@ const Category = () => {
     fetchData();
   }, [fetchData]);
 
+  useEffect(() => {
+    setSelectedSubCategories([]);
+  }, [categoryGroup]);
+
+  const handleCheckboxChange = (subCategory) => {
+    setSelectedSubCategories((prevSelected) => {
+      if (prevSelected.includes(subCategory)) {
+        return prevSelected.filter((item) => item !== subCategory);
+      } else {
+        return [...prevSelected, subCategory];
+      }
+    });
+  };
+
   const filteredProducts = useMemo(() => {
     if (searchTerm) {
       const lowerSearchTerm = searchTerm.toLowerCase();
@@ -55,20 +69,18 @@ const Category = () => {
           ) || product.title.toLowerCase().includes(lowerSearchTerm)
       );
     } else if (categoryGroup) {
-      return data.filter(
-        (item) =>
-          LIST_OF_CATEGORIES[categoryGroup]?.some(
-            (subcategory) =>
-              item.category.toLowerCase() === subcategory.toLowerCase()
-          ) &&
-          (selectedSubCategory
-            ? item.category.toLowerCase() === selectedSubCategory.toLowerCase()
-            : true)
+      return data.filter((item) =>
+        LIST_OF_CATEGORIES[categoryGroup]?.some(
+          (subcategory) =>
+            (selectedSubCategories.length === 0 ||
+              selectedSubCategories.includes(subcategory.toLowerCase())) &&
+            item.category.toLowerCase() === subcategory.toLowerCase()
+        )
       );
     } else {
       return data;
     }
-  }, [data, searchTerm, categoryGroup, selectedSubCategory]);
+  }, [data, searchTerm, categoryGroup, selectedSubCategories]);
 
   return (
     <div className="category-container">
@@ -95,37 +107,43 @@ const Category = () => {
                   filterOpen ? "open" : ""
                 }`}
               >
-                <button
-                  className="close-filter-btn"
+                <div>
+                  <label htmlFor="subcategory">Choose subcategories:</label>
+                  <br />
+                  <div className="subcategory-filter-checkbox-group">
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="subcategory"
+                        value=""
+                        checked={selectedSubCategories.length === 0}
+                        onChange={() => setSelectedSubCategories([])}
+                      />
+                      All
+                    </label>
+                    {LIST_OF_CATEGORIES[categoryGroup]?.map((subCategory) => (
+                      <label key={subCategory}>
+                        <input
+                          type="checkbox"
+                          name="subcategory"
+                          value={subCategory}
+                          checked={selectedSubCategories.includes(
+                            subCategory.toLowerCase()
+                          )}
+                          onChange={() =>
+                            handleCheckboxChange(subCategory.toLowerCase())
+                          }
+                        />
+                        {subCategory}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                <div
+                  className={`close-filter-btn  ${filterOpen ? "" : "open"}`}
                   onClick={() => setFilterOpen(false)}
                 >
                   X
-                </button>
-                <label htmlFor="subcategory">Choose a subcategory:</label>
-                <br />
-                <div className="subcategory-filter-radio-group">
-                  <label>
-                    <input
-                      type="radio"
-                      name="subcategory"
-                      value=""
-                      checked={selectedSubCategory === ""}
-                      onChange={() => setSelectedSubCategory("")}
-                    />
-                    All
-                  </label>
-                  {LIST_OF_CATEGORIES[categoryGroup]?.map((subCategory) => (
-                    <label key={subCategory}>
-                      <input
-                        type="radio"
-                        name="subcategory"
-                        value={subCategory}
-                        checked={selectedSubCategory === subCategory}
-                        onChange={() => setSelectedSubCategory(subCategory)}
-                      />
-                      {subCategory}
-                    </label>
-                  ))}
                 </div>
               </div>
             </>
