@@ -45,6 +45,21 @@
   grid-template-rows: repeat(2, 1fr);
 }
 
+.add-to-cart-popup{
+  background-color: green;
+  width: 200px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 5px;
+  position: absolute;
+  top: 100px;
+  left: 10px;
+  z-index: 2000;
+}
+
 /* Responsive styles for tablets and mobile devices */
 @media (max-width: 1024px) {
   .product-container {

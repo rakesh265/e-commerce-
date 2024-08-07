@@ -108,7 +108,7 @@ const Category = () => {
                 }`}
               >
                 <div>
-                  <label htmlFor="subcategory">Choose subcategories:</label>
+                  <label htmlFor="subcategory">Filter :</label>
                   <br />
                   <div className="subcategory-filter-checkbox-group">
                     <label>

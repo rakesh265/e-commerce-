@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { cartContext, productContext } from "../../App";
 import "../../Styles/ProductPreview.css";
 
 const ProductPreview = () => {
   const { productDetails } = useContext(productContext);
-  const {setCartItems} = useContext(cartContext)
+  const { setCartItems } = useContext(cartContext);
   const imageCount = productDetails ? productDetails.images.length : 0;
+  const [showPopup, setShowPopup] = useState(false);
 
   const imgClass =
     imageCount === 1
@@ -18,11 +19,19 @@ const ProductPreview = () => {
       ? "four-img"
       : "";
 
-      const handleAddToCart = (curItems) => {
-        setCartItems((prevItems)=>
-          [...prevItems, curItems]
-        )
+  const handleAddToCart = (curItems) => {
+    setCartItems((prevItems) => {
+      if (prevItems.some((item) => item.id === curItems.id)) {
+        return prevItems;
+      } else {
+        return [...prevItems, curItems];
       }
+    });
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+  };
 
   return (
     <div className="product-preview">
@@ -39,21 +48,27 @@ const ProductPreview = () => {
             ))}
           </div>
           <div className="specifications">
-          <div className="details">
-            <span className="type">{productDetails.category}</span>
-            <span className="title">{productDetails.title}</span>
-            <span className="description">{productDetails.description}</span>
+            <div className="details">
+              <span className="type">{productDetails.category}</span>
+              <span className="title">{productDetails.title}</span>
+              <span className="description">{productDetails.description}</span>
             </div>
             <div className="price-details">
               <span className="price">${productDetails.price}</span>
 
-              <button className="add-to-cart-btn" onClick={() =>handleAddToCart(productDetails)}>Add to Cart</button>
+              <button
+                className="add-to-cart-btn"
+                onClick={() => handleAddToCart(productDetails)}
+              >
+                Add to Cart
+              </button>
             </div>
-            </div>
+          </div>
         </div>
       ) : (
         <p className="no-details">No product details available</p>
       )}
+      {showPopup && <div className="add-to-cart-popup">Item Added to Cart</div>}
     </div>
   );
 };
