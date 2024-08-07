@@ -89,11 +89,7 @@ const Category = () => {
       ) : error ? (
         <p className="category-error">{error}</p>
       ) : (
-        <div
-          className={`${
-            searchTerm ? "product-container-main-1" : "product-container-main"
-          }`}
-        >
+        <div className="product-container-main">
           {!searchTerm && (
             <>
               <button
